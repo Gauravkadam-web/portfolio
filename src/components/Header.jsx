@@ -22,9 +22,13 @@ export default function Header() {
           className="navtoggle"
           id="navToggle"
           aria-label="Toggle menu"
+          aria-expanded={open}
+          aria-controls="mainNav"
           onClick={() => setOpen((o) => !o)}
         >
-          menu
+          <span className="navtoggle-bar"></span>
+          <span className="navtoggle-bar"></span>
+          <span className="navtoggle-bar"></span>
         </button>
         <nav className={`mainnav${open ? ' open' : ''}`} id="mainNav">
           {LINKS.map((l) => (
