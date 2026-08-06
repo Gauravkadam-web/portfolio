@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
 const LINKS = [
-  { href: '#about', label: 'About' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#education', label: 'Education' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#about', label: 'about.md' },
+  { href: '#experience', label: 'experience.md' },
+  { href: '#projects', label: 'projects.md' },
+  { href: '#skills', label: 'skills.md' },
+  { href: '#education', label: 'education.md' },
+  { href: '#contact', label: 'contact.md' },
 ];
 
 export default function Header() {
