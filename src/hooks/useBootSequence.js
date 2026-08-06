@@ -19,6 +19,7 @@ export default function useBootSequence() {
   const [pct, setPct] = useState(0);
   const [done, setDone] = useState(false);
   const finishedRef = useRef(false);
+  const indexRef = useRef(0);
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -35,24 +36,23 @@ export default function useBootSequence() {
     }
 
     let timer;
+
     function step() {
-      setLines((prev) => {
-        if (prev.length >= LINES.length) return prev;
-        const next = [...prev, LINES[prev.length]];
-        setPct(Math.min(100, Math.round((next.length / LINES.length) * 100)));
-        return next;
-      });
-      timer = setTimeout(() => {
-        setLines((prev) => {
-          if (prev.length < LINES.length) {
-            step();
-          } else {
-            timer = setTimeout(finish, 420);
-          }
-          return prev;
-        });
-      }, 230 + Math.random() * 160);
+      if (finishedRef.current) return;
+
+      const nextIndex = indexRef.current;
+      if (nextIndex >= LINES.length) {
+        timer = setTimeout(finish, 420);
+        return;
+      }
+
+      setLines((prev) => [...prev, LINES[nextIndex]]);
+      indexRef.current += 1;
+      setPct(Math.min(100, Math.round((indexRef.current / LINES.length) * 100)));
+
+      timer = setTimeout(step, 230 + Math.random() * 160);
     }
+
     timer = setTimeout(step, 260);
     const safety = setTimeout(finish, 6000);
 
