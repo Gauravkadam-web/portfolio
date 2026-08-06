@@ -9,6 +9,7 @@ import Skills from './components/Skills';
 import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ParticleField from './components/ParticleField';
 
 import useBootSequence from './hooks/useBootSequence';
 import useScrollReveal from './hooks/useScrollReveal';
@@ -28,6 +29,7 @@ export default function App() {
   return (
     <>
       <div className="bg-grid" aria-hidden="true"></div>
+      <ParticleField />
       <div className="bg-glow" ref={glowRef} aria-hidden="true"></div>
 
       <Boot lines={lines} pct={pct} done={done} />
