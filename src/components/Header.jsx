@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const LINKS = [
   { href: '#about', label: 'about.md' },
   { href: '#experience', label: 'experience.md' },
@@ -8,18 +10,35 @@ const LINKS = [
 ];
 
 export default function Header() {
+  const [open, setOpen] = useState(false);
+
   return (
     <header className="site">
       <div className="header-inner">
         <a className="logo" href="#hero">
           <span className="prompt">&gt;_</span> Gaurav Kadam
         </a>
-        <nav className="mainnav" id="mainNav">
+        <div className="header-actions">
+          <button
+            className={`navtoggle${open ? ' open' : ''}`}
+            id="navToggle"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            aria-controls="mainNav"
+            onClick={() => setOpen((o) => !o)}
+          >
+            <span className="navtoggle-bar"></span>
+            <span className="navtoggle-bar"></span>
+            <span className="navtoggle-bar"></span>
+          </button>
+        </div>
+        <nav className={`mainnav${open ? ' open' : ''}`} id="mainNav">
           {LINKS.map((l) => (
             <a
               key={l.href}
               className="nav-link"
               href={l.href}
+              onClick={() => setOpen(false)}
             >
               {l.label}
             </a>
@@ -29,6 +48,7 @@ export default function Header() {
             href="/Gaurav_Kadam_Resume.pdf"
             target="_blank"
             rel="noopener"
+            onClick={() => setOpen(false)}
           >
             Resume
           </a>
